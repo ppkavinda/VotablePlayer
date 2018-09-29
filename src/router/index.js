@@ -5,6 +5,7 @@ import Login from '@/components/Login'
 import SignUp from '@/components/SignUp'
 import Vote from '@/components/Vote'
 import Player from '@/components/Player'
+import NotFound from '@/components/NotFound'
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -48,6 +49,11 @@ let router = new Router({
             meta: {
                 guest: true,
             }
+        },
+        {
+            path: '*',
+            name: '404',
+            component: NotFound,
         }
     ]
 })
