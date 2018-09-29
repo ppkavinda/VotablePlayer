@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/Login'
 import SignUp from '@/components/SignUp'
-import Player from '@/components/Player'
+import Vote from '@/components/Vote'
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -17,10 +17,6 @@ let router= new Router({
     {
       path: '/',
       redirect:'/login'
-    },
-    {
-      path: '/player',
-      component: Player,
     },
     {
       path: '/hello',
@@ -39,6 +35,11 @@ let router= new Router({
       path: '/signup',
       name: 'SignUp',
       component: SignUp
+    },
+    {
+      path: '/vote',
+      name: 'Vote',
+      component: Vote
     }
   ]
 })
@@ -48,7 +49,7 @@ router.beforeEach((to, from, next) => {
   let requireAuth = to.matched.some(record=>record.meta.requireAuth);
 
   if(requireAuth&&!currentUser) next('login')
-  else if(!requireAuth&&currentUser) next ('hello')
+  // else if(!requireAuth&&currentUser) next ('hello')
   else next()
 })
 
