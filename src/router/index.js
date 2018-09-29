@@ -8,48 +8,60 @@ import firebase from 'firebase'
 
 Vue.use(Router)
 
-let router= new Router({
-  routes: [
-    {
-      path: '*',
-      redirect:'/login'
-    },
-    {
-      path: '/',
-      redirect:'/login'
-    },
-    {
-      path: '/player',
-      component: Player,
-    },
-    {
-      path: '/hello',
-      name: 'HelloWorld',
-      component: HelloWorld,
-      meta: {
-        requireAuth: true
-      }
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
-    },
-    {
-      path: '/signup',
-      name: 'SignUp',
-      component: SignUp
-    }
-  ]
+let router = new Router({
+    routes: [
+        {
+            path: '/player',
+            component: Player,
+            meta: {
+                requireAuth: true
+            }
+        },
+        {
+            path: '/',
+            name: 'HelloWorld',
+            component: HelloWorld,
+            meta: {
+                requireAuth: true
+            }
+        },
+        {
+            path: '/login',
+            name: 'Login',
+            component: Login,
+            meta: {
+                guest: true,
+            }
+        },
+        {
+            path: '/signup',
+            name: 'SignUp',
+            component: SignUp,
+            meta: {
+                guest: true,
+            }
+        }
+    ]
 })
 
 router.beforeEach((to, from, next) => {
-  let currentUser = firebase.auth().currentUser;
-  let requireAuth = to.matched.some(record=>record.meta.requireAuth);
+    let currentUser = firebase.auth().currentUser;
+    let requireAuth = to.matched.some(record => record.meta.requireAuth)
+    let guest = to.matched.some(record => record.meta.guest)
 
-  if(requireAuth&&!currentUser) next('login')
-  else if(!requireAuth&&currentUser) next ('hello')
-  else next()
+    if (requireAuth) {
+        if (!currentUser) {
+              next({
+                path: '/login',
+                params: { nextUrl: to.fullPath }
+              })
+        } else {
+            next ()
+        }
+    } else if (guest) {
+        if (currentUser) router.push('/')
+        else next()
+    }  else next ()
 })
 
 export default router
