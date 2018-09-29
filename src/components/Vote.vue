@@ -1,4 +1,5 @@
 <template>
+
     <div class="container">
         <div class="card-panel teal lighten-2">
             <h3>Welcome to <b>iHack 4.0</b> Web Player</h3>
@@ -13,7 +14,7 @@
         </div>
         <div class="row">
             <div class="col s12">
-                <button class="btn">Add New Song </button>
+                <router-link to="/newSong"><button class="btn">Add New Song </button></router-link>
             </div>
         </div>
         <div class="card-panel card-small blue">
@@ -56,6 +57,7 @@
             </div>
         </div>
     </div>
+    
 </template>
 
 <script>
