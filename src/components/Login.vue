@@ -21,11 +21,11 @@
         methods:{
             signIn: function(){
                 firebase.auth().signInWithEmailAndPassword(this.email,this.password).then(
-                    function(user){
-                        alert('Login Success')
+                    (user)=>{
+                        this.$router.replace('hello')
                     },
-                    function(err){
-                        alert('Check your Login Credentials')
+                    (err)=>{
+                        alert('Oops. '+err.message)
                     }
                 );
             }
