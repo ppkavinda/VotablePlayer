@@ -14,13 +14,13 @@
         name:'signup',
         data: function(){
             return {
-                emai:'',
+                email:'',
                 password:''
             }
         },
         methods:{
             signUp:function(){
-                firebase.auth().createUserWithEmailAndPassword(this.emai,this.password).then(
+                firebase.auth().createUserWithEmailAndPassword(this.email,this.password).then(
                     function (user){
                         alert('Your account has been created!')
                     },
