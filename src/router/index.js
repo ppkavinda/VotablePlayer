@@ -6,6 +6,7 @@ import SignUp from '@/components/SignUp'
 import Vote from '@/components/Vote'
 import Player from '@/components/Player'
 import NotFound from '@/components/NotFound'
+import NewSong from '@/components/AddNewSong'
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -25,7 +26,14 @@ let router = new Router({
           meta: {
               requireAuth: true
           }
-      },
+        },
+        {
+            path: '/newSong',
+            component: NewSong,
+            meta: {
+                requireAuth: true
+            }
+          },
         {
             path: '/',
             name: 'HelloWorld',
