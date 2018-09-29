@@ -11,6 +11,37 @@
                 <h5>Next Song</h5>
             </div>
         </div>
+        <div class="row">
+            <div class="col s12">
+                <button class="btn">Add New Song </button>
+            </div>
+        </div>
+        <div class="card-panel card-small blue">
+            <div class="row">
+                <div class="col s8">
+                    Song Name
+                </div>
+                <div class="col s2">
+                    <button class="btn green">Upvote</button>
+                </div>
+                <div class="col s2">
+                    <button class="btn red">DownVote</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-panel card-small blue">
+            <div class="row">
+                <div class="col s8">
+                    Song Name
+                </div>
+                <div class="col s2">
+                    <button class="btn green">Upvote</button>
+                </div>
+                <div class="col s2">
+                    <button class="btn red">DownVote</button>
+                </div>
+            </div>
+        </div>
         <div class="card-panel card-small blue">
             <div class="row">
                 <div class="col s8">
@@ -36,6 +67,9 @@ export default {
 <style>
 .card-small {
      height:70px;
+}
+.card-xs {
+     height:35px;
 }
 .card-main{
     height:200px;
