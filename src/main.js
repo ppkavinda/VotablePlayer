@@ -4,6 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import firebase from 'firebase'
+import VueYoutube from 'vue-youtube'
+
+Vue.use(VueYoutube)
 
 Vue.config.productionTip = false
 
@@ -17,16 +20,16 @@ var config = {
 };
 firebase.initializeApp(config);
 
-/* eslint-disable no-new */
-firebase.auth().onAuthStateChanged(function(user){
-  // if(app){
-    let app=new Vue({
+let app;
+firebase.auth().onAuthStateChanged(user => {
+  if(!app){
+    app = new Vue({
       el: '#app',
       router,
       components: { App },
       template: '<App/>'
     })
-  // }
+  }
 });
 
 
