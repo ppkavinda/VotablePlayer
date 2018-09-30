@@ -10,7 +10,7 @@
                     <input type="text" placeholder="Enter Song Name">
                 </div>
                 <div class="col s12 m6 offset-m3 l4 offset-l4 z-depth-6">
-                    <button class="btn">Add</button>
+                    <button class="btn">Search</button>
                 </div>
             </div>
         </div>
@@ -18,7 +18,34 @@
 </template>
 
 <script>
+    import { YOUTUBE_API_KEY } from '../config';
+    import YouTubeSearch from 'youtube-api-search';
     export default {
-    name: 'newsong'
-}
+    name: 'newsong',
+    data(){
+        return {
+        show: false,
+        video: null,
+        videos: [],
+        selectedVideo: null,
+        }
+    },
+    created() {
+        this.videoSearch('Surfing');
+    },
+    methods:{
+        videoSearch(searchTerm) {
+            YouTubeSearch( {key: YOUTUBE_API_KEY, term: searchTerm}, (videos) => {
+
+            this.videos = videos;
+            // get the first video (before one is selected --this is the default)
+            this.selectedVideo = videos[0];
+            this.show = true;
+            });
+        },
+        videoSelect(video) {
+            this.selectedVideo = video;
+        }
+    }
+    }
 </script>

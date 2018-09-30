@@ -13,10 +13,12 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@types/gapi.client.youtube": "^3.0.0",
     "firebase": "^5.5.2",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vue-youtube": "^1.2.5"
+    "vue-youtube": "^1.2.5",
+    "youtube-api-search": "0.0.5"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
