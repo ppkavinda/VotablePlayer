@@ -36,7 +36,7 @@
     name: 'newsong',
     components: {SearchBar, VideoListItem},
     firebase: {
-        items: db.ref('songs') > items
+        items: db.ref('songs')
     },
     data(){
         return {

@@ -8,8 +8,10 @@ import Player from '@/components/Player'
 import NotFound from '@/components/NotFound'
 import NewSong from '@/components/AddNewSong'
 import firebase from 'firebase'
+import VueFire from 'vuefire'
 
 Vue.use(Router)
+Vue.use(VueFire)
 
 let router = new Router({
     routes: [
