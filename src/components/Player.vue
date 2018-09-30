@@ -12,6 +12,8 @@
 </template>
  
 <script>
+import fs from 'firebase'
+
 export default {
 	data() {
 		return {
@@ -35,7 +37,8 @@ export default {
 		},
 		finished () {
 			console.log('finished')
-			this.videoId = this.nextId
+			// this.videoId = this.nextId
+			// TODO
 		}
 	},
 	computed: {

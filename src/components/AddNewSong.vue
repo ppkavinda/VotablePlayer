@@ -7,12 +7,20 @@
             <h5>Add New Song</h5>
             <div class="row">
                 <div class="col s12 m6 offset-m3 l4 offset-l4 z-depth-6">
-                    <input type="text" placeholder="Enter Song Name">
-                </div>
-                <div class="col s12 m6 offset-m3 l4 offset-l4 z-depth-6">
-                    <button class="btn">Search</button>
+                    <search-bar @newSearch="videoSearch"></search-bar>
                 </div>
             </div>
+            <ul>
+                <video-list-item
+                v-for="video in videos"
+                :video="video"
+                :imgUrl="video.snippet.thumbnails.medium.url"
+                :videoTitle="video.snippet.title"
+                :key="video.etag"
+                @videoSelected="addToThePlaylist"
+                ></video-list-item>
+            </ul>
+            
         </div>
    </div> 
 </template>
@@ -20,12 +28,15 @@
 <script>
     import { YOUTUBE_API_KEY } from '../config';
     import YouTubeSearch from 'youtube-api-search';
+    import SearchBar from './SearchBar'
+    import VideoListItem from './VideoListItem'
+
     export default {
     name: 'newsong',
+    components: {SearchBar, VideoListItem},
+
     data(){
         return {
-        show: false,
-        video: null,
         videos: [],
         selectedVideo: null,
         }
@@ -36,15 +47,15 @@
     methods:{
         videoSearch(searchTerm) {
             YouTubeSearch( {key: YOUTUBE_API_KEY, term: searchTerm}, (videos) => {
-
             this.videos = videos;
-            // get the first video (before one is selected --this is the default)
-            this.selectedVideo = videos[0];
-            this.show = true;
+            console.log(videos)
+            // // get the first video (before one is selected --this is the default)
             });
         },
-        videoSelect(video) {
-            this.selectedVideo = video;
+        addToThePlaylist (video) {
+            // TODO send to the firestore
+
+            this.videos.splice(this.videos.indexOf(video),1);
         }
     }
     }
