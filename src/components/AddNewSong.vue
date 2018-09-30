@@ -30,11 +30,14 @@
     import YouTubeSearch from 'youtube-api-search';
     import SearchBar from './SearchBar'
     import VideoListItem from './VideoListItem'
+    import {db} from '../db';
 
     export default {
     name: 'newsong',
     components: {SearchBar, VideoListItem},
-
+    firebase: {
+        items: db.ref('songs') > items
+    },
     data(){
         return {
         videos: [],
@@ -42,20 +45,20 @@
         }
     },
     created() {
-        this.videoSearch('Surfing');
+        this.videoSearch('songs');
     },
     methods:{
         videoSearch(searchTerm) {
             YouTubeSearch( {key: YOUTUBE_API_KEY, term: searchTerm}, (videos) => {
             this.videos = videos;
-            console.log(videos)
+            //console.log(videos)
             // // get the first video (before one is selected --this is the default)
             });
         },
         addToThePlaylist (video) {
             // TODO send to the firestore
-
             this.videos.splice(this.videos.indexOf(video),1);
+            this.$firebaseRefs.items.push(video);
         }
     }
     }

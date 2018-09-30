@@ -1,7 +1,7 @@
 <template>
 <li class="row">
-<div class="col s12 m7">
-    <div class="card horizontal">
+<div class="col s12 m12">
+    <div class="card horizontal center">
         <div class="card-image">
            <img :src="imgUrl">
         </div>
@@ -30,6 +30,7 @@ export default {
   methods: {
     videoSelected() {
         this.$emit('videoSelected', this.video);
+        console.log(this.video);
     }
   }
 };
