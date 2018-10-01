@@ -5,15 +5,14 @@
   "author": "Danushka Herath <Danushkaherath96@gmail.com>",
   "private": true,
   "scripts": {
+    "postinstall": "npm run build",
+    "start": "node server.js",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "build": "node build/build.js"
   },
-"postinstall": "npm run build",
-"start": "node server.js",
   "dependencies": {
     "@types/gapi.client.youtube": "^3.0.0",
     "firebase": "^5.5.2",
