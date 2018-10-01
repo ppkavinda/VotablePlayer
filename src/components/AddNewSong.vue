@@ -31,6 +31,7 @@
     import SearchBar from './SearchBar'
     import VideoListItem from './VideoListItem'
     import {db} from '../db';
+    import firebase from 'firebase'
 
     export default {
     name: 'newsong',
@@ -58,7 +59,13 @@
         addToThePlaylist (video) {
             // TODO send to the firestore
             this.videos.splice(this.videos.indexOf(video),1);
-            this.$firebaseRefs.items.push(video);
+            let videoObject = {
+                user: firebase.auth().currentUser.uid,
+                video,
+                votes: 0
+            }
+            // console.log(firebase.auth().currentUser.uid)
+            this.$firebaseRefs.items.push(videoObject);
         }
     }
     }

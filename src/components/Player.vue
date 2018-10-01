@@ -1,7 +1,7 @@
 <template>
 <div>
 	<youtube :player-vars="config" 
-		:video-id="videoId" 
+		:video-id="songs[0].video.id.videoId" 
 		:width="width" :height="height" 
 		ref="youtube" 
 		@playing="playing"
@@ -13,11 +13,15 @@
  
 <script>
 import fs from 'firebase'
+import { db } from '../db'
 
 export default {
+	firebase: {
+        songs: db.ref('songs')
+    },
 	data() {
 		return {
-			videoId: "Q8TXgCzxEnw",
+			currentSong: {},
 			config: {
 				autoplay: 1,
 				// controls: 0,
@@ -37,6 +41,7 @@ export default {
 		},
 		finished () {
 			console.log('finished')
+			this.$firebaseRefs.songs.child(this.songs[0]['.key']).remove();
 			// this.videoId = this.nextId
 			// TODO
 		}
