@@ -24,10 +24,10 @@
                 </div>
                 <div class="col s4"><strong>{{ song.video.snippet.title }}</strong></div>
                 <div class="col s2">
-                    <button class="btn black">{{ song.votes }}</button>
+                    <button class="btn black">{{ song.votes.length }}</button>
                 </div>
                 <div class="col s2">
-                    <button class="btn green" @click="onUpvote(song['.key'], song.votes)"> Upvote<span>({{ song.votes }})</span></button>
+                    <button class="btn green" @click="onUpvote(song['.key'], song.votes)"> Upvote</button>
                 </div>
                 <div class="col s2">
                     <button class="btn red" @click="onDownvote(song['.key'], song.votes)">DownVote</button>
@@ -39,35 +39,39 @@
 
 <script>
 import { db } from "../db";
+import firebase from 'firebase'
 
 export default {
     name: 'vote',
-    firebase: {
-        songs: db.ref('songs')
+    firebase () {
+        return {
+            songs: db.ref('songs')
+        }
     },
     data () {
         return {
             // songs: [],
+            voted: false,
         }
     },
     methods: {
         onUpvote (key, votes) {
-            votes++
+            votes.push(firebase.auth().currentUser.uid)
             this.$firebaseRefs.songs.child(key).child('votes').set(votes)
             this.songs.sort(this.compare)
         },
         onDownvote (key, votes) {
-            votes--
-            if (votes < 0) return
+            votes.splice(votes.indexOf(firebase.auth().currentUser.uid), 1)
+            if (votes.length < 0) return
             this.$firebaseRefs.songs.child(key).child('votes').set(votes)
             this.songs.sort(this.compare)
         },
         compare(a,b) {
-            if (a.votes > b.votes)
+            if (a.votes.length > b.votes.length)
                 return -1;
-            if (a.votes < b.votes)
+            if (a.votes.length < b.votes.length)
                 return 1;
-            return 0;
+            return 0;   
         }
     },
     beforeMount () {
@@ -76,7 +80,6 @@ export default {
 }
 </script>
 
-ongc
 <style>
 .card-small {
      height:150px;

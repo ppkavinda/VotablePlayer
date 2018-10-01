@@ -3,7 +3,7 @@
 	<youtube :player-vars="config" 
 		:video-id="songs[0].video.id.videoId" 
 		:width="width" :height="height" 
-		ref="youtube" 
+		ref="youtube"
 		@playing="playing"
 		@ended="finished"
 		>
@@ -16,8 +16,10 @@ import fs from 'firebase'
 import { db } from '../db'
 
 export default {
-	firebase: {
-        songs: db.ref('songs')
+	firebase () {
+		return {
+			songs: db.ref('songs').orderByChild('votes')
+		}
     },
 	data() {
 		return {
@@ -38,6 +40,7 @@ export default {
 		},
 		playing () {
 			console.log(this.player);
+			console.log(this.songs.length)
 		},
 		finished () {
 			console.log('finished')
