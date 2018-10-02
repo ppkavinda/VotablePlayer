@@ -47,7 +47,7 @@
         }
     },
     created() {
-        this.videoSearch('songs');
+        //this.videoSearch('songs');
     },
     methods:{
         videoSearch(searchTerm) {

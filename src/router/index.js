@@ -39,7 +39,7 @@ let router = new Router({
         {
             path: '/',
             name: 'HelloWorld',
-            component: HelloWorld,
+            component: Vote,
             meta: {
                 requireAuth: true
             }
