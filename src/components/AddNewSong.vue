@@ -62,8 +62,8 @@
             let videoObject = {
                 user: firebase.auth().currentUser.uid,
                 video,
-                upvotes: [firebase.auth().currentUser.uid],
-                downvotes: [],
+                upvotes: ['a', firebase.auth().currentUser.uid],
+                downvotes: ['a'],
                 status: 0,
             }
             // console.log(firebase.auth().currentUser.uid)

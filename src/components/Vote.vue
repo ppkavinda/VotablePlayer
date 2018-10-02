@@ -23,13 +23,17 @@
                 </div>
                 <div class="col s4"><strong>{{ song.video.snippet.title }}</strong></div>
                 <div class="col s2">
-                    <button class="btn black">{{ song.upvotes.length - (song.downvotes)  ? song.downvotes.length : 0 }}</button>
+                    <button class="btn black">{{ song.upvotes.length - ((song.downvotes)  ? song.downvotes.length : 0) }}</button>
                 </div>
                 <div class="col s2">
-                    <button class="btn green" @click="onUpvote(song['.key'], song.votes)" :class="{'disabled' : voted(song.upvotes)}"> Upvote</button>
+                    <button class="btn green" 
+                        @click="onUpvote(song['.key'], song)" 
+                        :class="{'disabled' : voted(song)}"> Upvote</button>
                 </div>
                 <div class="col s2">
-                    <button class="btn red" @click="onDownvote(song['.key'], song.votes)" :class="{'disabled' : !voted(song.downvotes)}">DownVote</button>
+                    <button class="btn red" 
+                        @click="onDownvote(song['.key'], song)" 
+                        :class="{'disabled' : voted(song)}">DownVote</button>
                 </div>
             </div>
         </div>
@@ -54,25 +58,27 @@ export default {
         }
     },
     methods: {
-        onUpvote (key, votes) {
+        onUpvote (key, song) {
             let uid = firebase.auth().currentUser.uid
-            if (votes.includes(uid)) return
+            if (this.voted(song)) return
 
-            votes.push(uid)
-            this.$firebaseRefs.songs.child(key).child('votes').set(votes)
+            song.upvotes.push(uid)
+            this.$firebaseRefs.songs.child(key).child('upvotes').set(song.upvotes)
             this.songs.sort(this.compare)
         },
-        onDownvote (key, votes) {
-            votes.splice(votes.indexOf(firebase.auth().currentUser.uid), 1)
-            // if (votes.length < 0) return
-            this.$firebaseRefs.songs.child(key).child('votes').set(votes)
-            this.songs.sort(this.compare)
-        },
-        voted (votes) {
-            if (! votes) return
-            console.log('vote')
+        onDownvote (key, song) {
             let uid = firebase.auth().currentUser.uid
-            return votes.includes(uid)
+            if  (this.voted(song)) return
+
+            song.downvotes.push(uid) 
+            this.$firebaseRefs.songs.child(key).child('downvotes').set(song.downvotes)
+            this.songs.sort(this.compare)
+        },
+        voted (song) {
+            console.log(song.upvotes, song.downvotes)
+            let uid = firebase.auth().currentUser.uid
+
+            return song.upvotes.includes(uid) || song.downvotes.includes(uid)
         },
         compare(a,b) {
             if (a.upvotes.length - a.downvotes.length > b.upvotes.length - b.downvotes.length)
@@ -83,7 +89,7 @@ export default {
         }
     },
     beforeMount () {
-        console.log(this.songs)
+        // console.log(this.songs)
     }
 }
 </script>
