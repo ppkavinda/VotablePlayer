@@ -6,7 +6,7 @@
 		:width="width" :height="height" 
 		ref="youtube"
 		@playing="playing(songs[0])"
-		@ended="finished"
+		@ended="finished(songs[0])"
 		>
 	</youtube>
 </div>
@@ -41,15 +41,14 @@ export default {
 		},
 		playing (song) {
 			let key = song['.key']
-			delete song['.key']
-			song.status = 1
-			this.$firebaseRefs.songs.child(key).set(song)
+			this.$firebaseRefs.songs.child(key).child('status').set(1)
 			console.log(song);
 			console.log(this.songs.length)
 		},
-		finished () {
+		finished (song) {
+			console.log(song)
 			console.log('finished')
-			this.$firebaseRefs.songs.child(this.songs[0]['.key']).remove();
+			this.$firebaseRefs.songs.child(song['.key']).remove();
 			// this.videoId = this.nextId
 			// TODO
 		}
