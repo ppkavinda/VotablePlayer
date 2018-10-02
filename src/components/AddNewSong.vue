@@ -4,6 +4,7 @@
             <h3>Welcome to <b>iHack 4.0</b> Web Player</h3>
         </div>
         <div class="card-panel ">
+            <router-link to="vote"><button class="btn left blue">Back to Vote</button></router-link>
             <h5>Add New Song</h5>
             <div class="row">
                 <div class="col s12 m6 offset-m3 l4 offset-l4 z-depth-6">
