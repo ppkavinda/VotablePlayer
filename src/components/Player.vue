@@ -1,10 +1,11 @@
 <template>
 <div>
 	<youtube :player-vars="config" 
+		v-if="songs[0]"
 		:video-id="songs[0].video.id.videoId" 
 		:width="width" :height="height" 
 		ref="youtube"
-		@playing="playing"
+		@playing="playing(songs[0])"
 		@ended="finished"
 		>
 	</youtube>
@@ -38,8 +39,12 @@ export default {
 		playVideo () {
 			this.player.playVideo();
 		},
-		playing () {
-			console.log(this.player);
+		playing (song) {
+			let key = song['.key']
+			delete song['.key']
+			song.status = 1
+			this.$firebaseRefs.songs.child(key).set(song)
+			console.log(song);
 			console.log(this.songs.length)
 		},
 		finished () {
