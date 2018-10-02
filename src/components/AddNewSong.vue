@@ -62,7 +62,9 @@
             let videoObject = {
                 user: firebase.auth().currentUser.uid,
                 video,
-                votes: [firebase.auth().currentUser.uid]
+                upvotes: [firebase.auth().currentUser.uid],
+                downvotes: [],
+                status: 0,
             }
             // console.log(firebase.auth().currentUser.uid)
             this.$firebaseRefs.items.push(videoObject);
