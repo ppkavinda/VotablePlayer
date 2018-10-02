@@ -59,6 +59,7 @@ export default {
     },
     methods: {
         onUpvote (key, song) {
+            console.log(song)
             let uid = firebase.auth().currentUser.uid
             if (this.voted(song)) return
 
