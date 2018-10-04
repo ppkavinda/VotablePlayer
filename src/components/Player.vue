@@ -32,7 +32,6 @@ export default {
 			},
 			width: '1300',
 			height: '650',
-			nextId: 'jC5MQJ8BZqw',
 		};
 	},
 	methods: {
@@ -42,8 +41,8 @@ export default {
 		playing (song) {
 			let key = song['.key']
 			this.$firebaseRefs.songs.child(key).child('status').set(1)
-			console.log(song);
-			console.log(this.songs.length)
+			// console.log(song);
+			// console.log(this.songs.length)
 		},
 		finished (song) {
 			console.log(song)

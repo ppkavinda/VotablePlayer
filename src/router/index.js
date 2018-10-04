@@ -10,6 +10,8 @@ import NewSong from '@/components/AddNewSong'
 import firebase from 'firebase'
 import VueFire from 'vuefire'
 
+import { playerPassword } from "../player.config";
+
 Vue.use(Router)
 Vue.use(VueFire)
 
@@ -20,7 +22,12 @@ let router = new Router({
             component: Player,
             meta: {
                 requireAuth: true
-            }
+            },
+            beforeEnter: (to, from, next) => {
+                let pw = prompt('Curious huh ? Enter password Please :)')
+                if (pw == playerPassword) next()
+                else router.push('/')
+            },
         },
         {
           path: '/vote',
