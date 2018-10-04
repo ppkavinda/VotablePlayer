@@ -65,7 +65,7 @@
             signUp:function(){
                 firebase.auth().createUserWithEmailAndPassword(this.email,this.password).then(
                     (user)=>{
-                        this.$router.replace('hello')
+                        this.$router.replace('vote')
                     },
                     (err)=>{
                         alert('Oops, '+err.message)
