@@ -45,8 +45,8 @@ export default {
 			// console.log(this.songs.length)
 		},
 		finished (song) {
-			console.log(song)
-			console.log('finished')
+			// console.log(song)
+			// console.log('finished')
 			this.$firebaseRefs.songs.child(song['.key']).remove();
 			// this.videoId = this.nextId
 			// TODO

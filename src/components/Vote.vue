@@ -12,7 +12,8 @@
         </div>
         <div class="row">
             <div class="col s12">
-                <router-link to="/newSong"><button class="btn">Add New Song </button></router-link>
+            <router-link tag="a" title="add new song" to="/newSong" id="addButton" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></router-link>
+
             </div>
         </div>
         <div v-for="song in songs.filter( song => song.status != 1)" :key="song['.key']" class="card-panel card-small blue">
@@ -59,7 +60,7 @@ export default {
     },
     methods: {
         onUpvote (key, song) {
-            console.log(song)
+            // console.log(song)
             let uid = firebase.auth().currentUser.uid
             if (this.voted(song)) return
 
@@ -76,7 +77,7 @@ export default {
             this.songs.sort(this.compare)
         },
         voted (song) {
-            console.log(song.upvotes, song.downvotes)
+            // console.log(song.upvotes, song.downvotes)
             let uid = firebase.auth().currentUser.uid
 
             return song.upvotes.includes(uid) || song.downvotes.includes(uid)
@@ -104,5 +105,10 @@ export default {
 }
 .card-main{
     height:200px;
+}
+#addButton {
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
 }
 </style>
