@@ -4,10 +4,17 @@
             <h3>Welcome to <b>iHack 4.0</b> Web Player</h3>
         </div>
         <div class="row">
-            <div class="col card-panel card-small red lighten-1 s12 card-main">
-                <img :src="songs.filter( song => song.status==1)[0].video.snippet.thumbnails.default.url">
-
-                <h5>{{ songs.filter( song => song.status == 1)[0].video.snippet.title}}</h5>
+            <div class="col card-panel card-small red lighten-1 s12 card-nowPlaying">
+                
+                <div class="row">
+                    <div class="col s4" style="padding-top:0.7rem">
+                        <img :src="songs.filter( song => song.status==1)[0].video.snippet.thumbnails.medium.url">
+                    </div>
+                    <div class="col s8" style="padding-left:20px">
+                        <h4>Now Playing</h4>
+                        <marquee><h6 style="color:white">{{ songs.filter( song => song.status == 1)[0].video.snippet.title}}</h6></marquee>                        
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -127,6 +134,9 @@ export default {
 <style>
 .card-small {
      height:150px;
+}
+.card-nowPlaying{
+    height: 200px;
 }
 .card-xs {
      height:35px;
