@@ -69,6 +69,7 @@
                 upvotes: ['a', firebase.auth().currentUser.uid],
                 downvotes: ['a'],
                 status: 0,
+                name: video.snippet.title,
             }
             // console.log(firebase.auth().currentUser.uid)
             this.$firebaseRefs.items.push(videoObject);

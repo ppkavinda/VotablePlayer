@@ -105,7 +105,7 @@ export default {
         },
         Fsort () {
             // this.songs.sort(this.compare)
-            console.log(this.$firebaseRefs)
+            // console.log(this.$firebaseRefs)
 
         }
     },

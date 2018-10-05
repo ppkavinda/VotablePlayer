@@ -30,7 +30,7 @@ export default {
   methods: {
     videoSelected() {
         this.$emit('videoSelected', this.video);
-        console.log(this.video);
+        // console.log(this.video);
     }
   }
 };
