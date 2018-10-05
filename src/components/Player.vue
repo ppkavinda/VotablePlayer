@@ -18,9 +18,12 @@ import { db } from '../db'
 
 export default {
 	firebase () {
-		return {
-			songs: db.ref('songs').orderByChild('votes')
-		}
+        return {
+            songs: {
+                source: db.ref('songs'),
+                readyCallback: (e) => this.songs.sort(this.compare)
+            }
+        }
     },
 	data() {
 		return {
@@ -41,6 +44,8 @@ export default {
 		playing (song) {
 			let key = song['.key']
 			this.$firebaseRefs.songs.child(key).child('status').set(1)
+			this.songs.sort(this.compare)
+
 			// console.log(song);
 			// console.log(this.songs.length)
 		},
@@ -50,7 +55,15 @@ export default {
 			this.$firebaseRefs.songs.child(song['.key']).remove();
 			// this.videoId = this.nextId
 			// TODO
-		}
+		},
+		
+        compare(a,b) {
+            if (a.upvotes.length - a.downvotes.length > b.upvotes.length - b.downvotes.length)
+                return -1;
+            if (a.upvotes.length - a.downvotes.length < b.upvotes.length - b.downvotes.length)
+                return 1;
+            return 0;   
+        },
 	},
 	computed: {
 		player() {

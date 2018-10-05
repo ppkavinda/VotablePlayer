@@ -4,7 +4,10 @@
             <h3>Welcome to <b>iHack 4.0</b> Web Player</h3>
         </div>
         <div class="card-panel ">
-            <router-link tag="a" to="/vote" title="go back to vote" id="addButton" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">arrow_back </i></router-link>
+            <router-link tag="a" to="/vote" title="go back to vote" id="addButton" 
+                class="btn-floating btn-large waves-effect waves-light red">
+                <i class="material-icons">arrow_back </i>
+            </router-link>
             <h5>Add New Song</h5>
             <div class="row">
                 <div class="col s12 m6 offset-m3 l4 offset-l4 z-depth-6">

@@ -12,7 +12,10 @@
         </div>
         <div class="row">
             <div class="col s12">
-            <router-link tag="a" title="add new song" to="/newSong" id="addButton" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></router-link>
+            <router-link tag="a" title="add new song" 
+                to="/newSong" id="addButton" class="btn-floating btn-large waves-effect waves-light red">
+                <i class="material-icons">add</i>
+            </router-link>
 
             </div>
         </div>
@@ -49,12 +52,16 @@ export default {
     name: 'vote',
     firebase () {
         return {
-            songs: db.ref('songs')
+            songs: {
+                source: db.ref('songs'),
+                readyCallback: (e) => this.songs.sort(this.compare)
+            }
         }
     },
     data () {
         return {
-            // songs: [],
+            songs: [],
+            song: [],
             // voted: false,
         }
     },
@@ -88,11 +95,32 @@ export default {
             if (a.upvotes.length - a.downvotes.length < b.upvotes.length - b.downvotes.length)
                 return 1;
             return 0;   
+        },
+        Fsort () {
+            // this.songs.sort(this.compare)
+            console.log(this.$firebaseRefs)
+
         }
     },
     beforeMount () {
         // console.log(this.songs)
-    }
+    },
+    mounted () {
+        // if (this.songs) {
+            // this.songs.sort(this.compare)
+        // }
+        // console.log(this.$watch)
+        // this.songs.once('value').then(e => console.log(this))
+    },
+    // watch: {
+        // song (o, n) {
+            // this.songs = this.song
+            // this.songs.sort(this.compare)
+
+
+// console.log('asdf')
+        // }
+    // }
 }
 </script>
 
