@@ -11,6 +11,7 @@ Realtime Refresh/Update
 
 ## Technologies Used
 Frontend: [VueJs](https://vuejs.github.com)
+
 Database: [Firebase](https://firebase.google.com)
 
 ## Live Demostration
