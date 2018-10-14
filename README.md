@@ -24,6 +24,7 @@ write your own configuration file with a fresh firebase database credentials
 
 > src/db.js
 
+### Installing
 ``` bash
 # install dependencies
 npm install
