@@ -1,6 +1,20 @@
 # votableplayer
 
-> Web player with Vue + Firebase
+## Introduction
+This is a player that can use for a crowd entertainment event. You can project the player in to a screen. Ask users to login and add songs to the playlist. Users can upvote and downvote songs. The most voted song will be played as the next song. 
+
+## Features
+Login/Register as a user
+Voting System
+Add new Songs to the Playlist
+Realtime Refresh/Update
+
+## Technologies Used
+Frontend: [VueJs](https://vuejs.github.com)
+Database: [Firebase](https://firebase.google.com)
+
+## Live Demostration
+Visit the [https://ihack4.herokuapp.com](https://ihack4.herokuapp.com) for a live demostration
 
 ## Build Setup
 
@@ -29,6 +43,8 @@ npm test
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-# VotablePlayer
-Votable HTML Youtube Player
+write your own configuration file with a fresh firebase database credentials
 
+> src/db.js
+ 
+Happy Coding
