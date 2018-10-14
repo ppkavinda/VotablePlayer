@@ -1,54 +1,57 @@
 <template>
-    <div v-if="songs[0]" class="container">
-        <div class="card-panel teal lighten-2">
-            <h3>Welcome to <b>iHack 4.0</b> Web Player</h3>
-        </div>
-        <div class="row">
-            <div class="col card-panel card-small red lighten-1 s12 card-nowPlaying">
-                
-                <div class="row">
-                    <div class="col s4" style="padding-top:0.7rem">
-                        <img :src="songs.filter( song => song.status==1)[0].video.snippet.thumbnails.medium.url">
-                    </div>
-                    <div class="col s8" style="padding-left:20px">
-                        <h4>Now Playing</h4>
-                        <marquee><h6 style="color:white">{{ songs.filter( song => song.status == 1)[0].video.snippet.title}}</h6></marquee>                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-            <router-link tag="a" title="add new song" 
-                to="/newSong" id="addButton" class="btn-floating btn-large waves-effect waves-light red">
-                <i class="material-icons">add</i>
-            </router-link>
+  <div v-if="songs[0]" class="container">
+    <div class="card-panel teal lighten-2">
+      <h3>Welcome to <b>iHack 4.0</b> Web Player</h3>
+    </div>
+    <div class="row">
+      <div class="col card-panel card-small red lighten-1 s12 card-nowPlaying">
 
-            </div>
+        <div class="row">
+          <div class="col s4" style="padding-top:0.7rem">
+            <img :src="songs.filter( song => song.status==1)[0].video.snippet.thumbnails.medium.url">
+          </div>
+          <div class="col s8" style="padding-left:20px">
+            <h4>Now Playing</h4>
+            <marquee>
+              <h6 style="color:white">{{ songs.filter( song => song.status == 1)[0].video.snippet.title}}</h6>
+            </marquee>
+          </div>
         </div>
-        <div v-for="song in songs.filter( song => song.status != 1)" :key="song['.key']" class="card-panel card-small blue">
-            <div class="row">
-                <div class="col s2">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <router-link tag="a" title="add new song" to="/newSong" id="addButton" class="btn-floating btn-large waves-effect waves-light red">
+          <i class="material-icons">add</i>
+        </router-link>
 
+      </div>
+    </div>
+    <div v-for="song in songs.filter( song => song.status != 1)" :key="song['.key']" class="card-panel card-small blue">
+      <div class="row">
+        <div class="col s2">
+            <div class="card">
+                <div class="card-image">
                 <img :src="song.video.snippet.thumbnails.default.url" :alt="song.video.snippet.title">
                 </div>
-                <div class="col s4"><strong>{{ song.video.snippet.title }}</strong></div>
-                <div class="col s2">
-                    <button class="btn black">{{ song.upvotes.length - ((song.downvotes)  ? song.downvotes.length : 0) }}</button>
-                </div>
-                <div class="col s2">
-                    <button class="btn green" 
-                        @click="onUpvote(song['.key'], song)" 
-                        :class="{'disabled' : voted(song)}"> Upvote</button>
-                </div>
-                <div class="col s2">
-                    <button class="btn red" 
-                        @click="onDownvote(song['.key'], song)" 
-                        :class="{'disabled' : voted(song)}">DownVote</button>
+                <div class="card-title"  v-if="mySong(song)">
+                    <a class="btn-floating halfway-fab waves-effect waves-light btn-small red" @click="onDelete(song['.key'], song)"><i class="material-icons left">delete_forever</i>Delete</a>
                 </div>
             </div>
         </div>
+        <div class="col s4"><strong>{{ song.video.snippet.title }}</strong></div>
+        <div class="col s2">
+          <button class="btn black">{{ song.upvotes.length - ((song.downvotes) ? song.downvotes.length : 0) }}</button>
+        </div>
+        <div class="col s2">
+          <button class="btn green" @click="onUpvote(song['.key'], song)" :class="{'disabled' : voted(song)}"> Upvote</button>
+        </div>
+        <div class="col s2">
+          <button class="btn red" @click="onDownvote(song['.key'], song)" :class="{'disabled' : voted(song)}">DownVote</button>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -107,7 +110,14 @@ export default {
             // this.songs.sort(this.compare)
             // console.log(this.$firebaseRefs)
 
-        }
+        },
+        mySong (song) {
+            let uid = firebase.auth().currentUser.uid
+            return song.user === uid
+        },
+        onDelete(key, song) {
+            this.$firebaseRefs.songs.child(key).remove()
+        },
     },
     beforeMount () {
         // console.log(this.songs)
@@ -133,7 +143,7 @@ export default {
 
 <style>
 .card-small {
-     height:150px;
+     height:180px;
 }
 .card-nowPlaying{
     height: 200px;

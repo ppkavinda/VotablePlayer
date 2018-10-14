@@ -1,37 +1,38 @@
 <template>
-<li class="row">
-<div class="col s12 m12">
-    <div class="card horizontal center">
+  <li class="row">
+    <div class="col s12 m12">
+      <div class="card horizontal center">
         <div class="card-image">
-           <img :src="imgUrl">
+          <img :src="imgUrl">
         </div>
         <div class="card-stacked">
-            <div class="card-content">
-                <p v-text="videoTitle"></p>
-            </div>
-            <div class="card-action">
-                <button class="btn waves-effect waves-light" type="submit" name="action" @click="videoSelected">
-                    Add to the Playlist
-                </button>
-            </div>
+          <div class="card-content">
+            <p v-text="videoTitle"></p>
+          </div>
+          <div class="card-action">
+            <button class="btn waves-effect waves-light" type="submit" name="action" @click="videoSelected">
+              Add to the Playlist
+            </button>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</li>
+  </li>
 </template>
 
 <script>
-export default {
-  props: {
-    video: Object,
-    imgUrl: String,
-    videoTitle: String
-  },
-  methods: {
-    videoSelected() {
+  export default {
+    props: {
+      video: Object,
+      imgUrl: String,
+      videoTitle: String
+    },
+    methods: {
+      videoSelected() {
         this.$emit('videoSelected', this.video);
         // console.log(this.video);
+      }
     }
-  }
-};
+  };
+
 </script>
