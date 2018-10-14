@@ -19,6 +19,10 @@ Visit the [https://webplayer2.herokuapp.com](https://ihack4.herokuapp.com) for a
 
 ## Build Setup
 
+write your own configuration file with a fresh firebase database credentials
+
+> src/db.js
+
 ``` bash
 # install dependencies
 npm install
@@ -43,9 +47,5 @@ npm test
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-
-write your own configuration file with a fresh firebase database credentials
-
-> src/db.js
  
 Happy Coding
