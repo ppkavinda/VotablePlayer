@@ -19,6 +19,7 @@ Visit the [https://webplayer2.herokuapp.com](https://ihack4.herokuapp.com) for a
 
 ## Build Setup
 
+### Config Database
 write your own configuration file with a fresh firebase database credentials
 
 > src/db.js
