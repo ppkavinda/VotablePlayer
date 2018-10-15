@@ -14,8 +14,8 @@ Frontend: [VueJs](https://vuejs.github.com)
 
 Database: [Firebase](https://firebase.google.com)
 
-## Live Demostration
-Visit the [https://webplayer2.herokuapp.com](https://ihack4.herokuapp.com) for a live demostration
+## Live Demonstration
+Visit the [demo heroku app](https://webplayer2.herokuapp.com) for a live demo
 
 ## Build Setup
 
