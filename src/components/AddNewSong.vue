@@ -55,9 +55,12 @@
     methods:{
         videoSearch(searchTerm) {
             YouTubeSearch( {key: YOUTUBE_API_KEY, term: searchTerm}, (videos) => {
-            this.videos = videos;
-            //console.log(videos)
-            // // get the first video (before one is selected --this is the default)
+                videos.forEach(video => {
+                    video.alreadyInPlaylist = this.isPresentInPlaylist(video)
+                })            
+                this.videos = videos;
+                //console.log(videos)
+                // // get the first video (before one is selected --this is the default)
             });
         },
         addToThePlaylist (video) {
@@ -73,6 +76,12 @@
             }
             // console.log(firebase.auth().currentUser.uid)
             this.$firebaseRefs.items.push(videoObject);
+        },
+        isPresentInPlaylist(video) {
+            return this.items.some(addedSong => this.sameVideo(addedSong.video, video))
+        },
+        sameVideo(video1, video2) {
+            return (video1.id.kind === video2.id.kind && video1.id.videoId === video2.id.videoId)
         }
     }
     }

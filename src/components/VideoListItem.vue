@@ -10,7 +10,10 @@
             <p v-text="videoTitle"></p>
           </div>
           <div class="card-action">
-            <button class="btn waves-effect waves-light" type="submit" name="action" @click="videoSelected">
+            <button v-if="video.alreadyInPlaylist" class="btn waves-effect waves-light disabled">
+              Added in Playlist
+            </button>
+            <button v-else class="btn waves-effect waves-light" type="submit" name="action" @click="videoSelected">
               Add to the Playlist
             </button>
           </div>
